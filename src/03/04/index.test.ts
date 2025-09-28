@@ -1,20 +1,27 @@
-import { add, sub } from ".";
+import {add, sub} from './index';
 
-describe("四則演算", () => {
-  describe("add", () => {
-    test("返り値は、第一引数と第二引数の「和」である", () => {
-      expect(add(50, 50)).toBe(100);
-    });
-    test("合計の上限は、'100'である", () => {
-      expect(add(70, 80)).toBe(100);
-    });
-  });
-  describe("sub", () => {
-    test("返り値は、第一引数と第二引数の「差」である", () => {
-      expect(sub(51, 50)).toBe(1);
-    });
-    test("返り値の合計は、下限が'0'である", () => {
-      expect(sub(70, 80)).toBe(0);
-    });
-  });
+
+describe ('四則演算', () => {
+  describe('add', () =>{
+    test("返り値は第一引数と第二引数の輪である", () =>{
+      expect(add(30, 30)).toBe(60);
+    })
+    test("返り値の上限は100である", ()=>{
+      expect(add(60, 50)).toBe(100);
+    })
+    test("返り値の型はnumberである", ()=>{
+      expect(typeof add(10, 20)).toBe("number");
+    })
+  })
+  describe("sub", () =>{
+    test("返り値は第一引数から第二引数を引いた値である", () =>{
+      expect(sub(3, 1)).toBe(2);
+    })
+    test("返り値の下限は0である", () =>{
+      expect(sub(3, 5)).toBe(0);
+    })
+    test("返り値の型はnumberである", ()=>{
+      expect(typeof sub(10, 5)).toBe("number");
+    })  
+  })
 });
