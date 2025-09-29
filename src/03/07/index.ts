@@ -1,15 +1,23 @@
-export function wait(duration: number) {
+export function wait(duration: number){
   return new Promise((resolve) => {
-    setTimeout(() => {
+    setTimeout(() =>{
       resolve(duration);
     }, duration);
-  });
+  })
 }
 
-export function timeout(duration: number) {
-  return new Promise((_, reject) => {
-    setTimeout(() => {
+export function timeout(duration: number){
+  return new Promise((_, reject) =>{
+    setTimeout(() =>{
       reject(duration);
-    }, duration);
-  });
+    }), duration;
+  })
 }
+
+// export function timeout(duration: number) {
+//   return new Promise((_, reject) => {
+//     setTimeout(() => {
+//       reject(duration);
+//     }, duration);
+//   });
+// }
