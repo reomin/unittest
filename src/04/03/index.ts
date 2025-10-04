@@ -9,3 +9,23 @@ export async function getGreet() {
   }
   return `Hello, ${data.name}!`;
 }
+
+
+
+// export type profile ={
+//   id: string;
+//   name?: string;
+//   age?: number;
+//   email: string;
+// }
+
+
+// export function getMyProfileSync(): Promise<profile> {
+//   return fetch("https://example.com/api/my/profile").then(async (res) =>{
+//     if(!res.ok){
+//       throw new Error("Network response was not ok");
+//     }else{
+//       return res.json() as Promise<profile>;
+//     }
+//   })
+// }

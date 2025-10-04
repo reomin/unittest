@@ -3,6 +3,10 @@ const config = {
   feature: { spy: true },
 };
 
-export function checkConfig(callback?: (payload: object) => void) {
+export function checkConfig(callback?: (payload: object)=> void){
   callback?.(config);
 }
+
+// export function checkConfig(callback?: (payload: object) => void) {
+//   callback?.(config);
+// }
