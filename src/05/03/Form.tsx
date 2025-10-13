@@ -1,9 +1,10 @@
-type Props = {
+type Props ={
   name: string;
   onSubmit?: (event: React.FormEvent<HTMLFormElement>) => void;
-};
-export const Form = ({ name, onSubmit }: Props) => {
-  return (
+}
+
+export const Form = ({ name, onSubmit }: Props) =>{
+  return(
     <form
       onSubmit={(event) => {
         event.preventDefault();
@@ -16,5 +17,26 @@ export const Form = ({ name, onSubmit }: Props) => {
         <button>編集する</button>
       </div>
     </form>
-  );
-};
+  )
+}
+
+// type Props = {
+//   name: string;
+//   onSubmit?: (event: React.FormEvent<HTMLFormElement>) => void;
+// };
+// export const Form = ({ name, onSubmit }: Props) => {
+//   return (
+//     <form
+//       onSubmit={(event) => {
+//         event.preventDefault();
+//         onSubmit?.(event);
+//       }}
+//     >
+//       <h2>アカウント情報</h2>
+//       <p>{name}</p>
+//       <div>
+//         <button>編集する</button>
+//       </div>
+//     </form>
+//   );
+// };
