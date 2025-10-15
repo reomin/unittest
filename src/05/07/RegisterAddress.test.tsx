@@ -9,13 +9,23 @@ import {
 
 jest.mock("./fetchers");
 
-async function fillValuesAndSubmit() {
+//提出して値を返す関数
+async function fillValuesAndSubmit(){
   const contactNumber = await inputContactNumber();
   const deliveryAddress = await inputDeliveryAddress();
   const submitValues = { ...contactNumber, ...deliveryAddress };
   await clickSubmit();
   return submitValues;
 }
+
+
+// async function fillValuesAndSubmit() {
+//   const contactNumber = await inputContactNumber();
+//   const deliveryAddress = await inputDeliveryAddress();
+//   const submitValues = { ...contactNumber, ...deliveryAddress };
+//   await clickSubmit();
+//   return submitValues;
+// }
 
 async function fillInvalidValuesAndSubmit() {
   const contactNumber = await inputContactNumber({
@@ -32,13 +42,39 @@ beforeEach(() => {
   jest.resetAllMocks();
 });
 
-test("成功時「登録しました」が表示される", async () => {
+test("成功時登録しましたが表示される", async () =>{
+  //3Aを意識して書く
+  //Arrange
   const mockFn = mockPostMyAddress();
+  //Act
   render(<RegisterAddress />);
   const submitValues = await fillValuesAndSubmit();
+
+  //Assert
   expect(mockFn).toHaveBeenCalledWith(expect.objectContaining(submitValues));
   expect(screen.getByText("登録しました")).toBeInTheDocument();
-});
+})
+
+test("失敗時「登録に失敗しました」が表示される", async () => {
+  //3Aを意識して書く
+  //Arrange
+  const mockFn = mockPostMyAddress(500);
+  //Act
+  render(<RegisterAddress />);
+  const submitValues = fillValuesAndSubmit();
+
+  //Assert
+  expect(mockFn).toHaveBeenCalledWith(expect.objectContaining(submitValues));
+  expect(screen.getByText("登録に失敗しました")).toBeInTheDocument();
+})
+
+// test("成功時「登録しました」が表示される", async () => {
+//   const mockFn = mockPostMyAddress();
+//   render(<RegisterAddress />);
+//   const submitValues = await fillValuesAndSubmit();
+//   expect(mockFn).toHaveBeenCalledWith(expect.objectContaining(submitValues));
+//   expect(screen.getByText("登録しました")).toBeInTheDocument();
+// });
 
 test("失敗時「登録に失敗しました」が表示される", async () => {
   const mockFn = mockPostMyAddress(500);
@@ -61,10 +97,10 @@ test("不明なエラー時「不明なエラーが発生しました」が表�
 });
 
 test("Snapshot: 登録フォームが表示される", async () => {
-  mockPostMyAddress();
-  // const mockFn = mockPostMyAddress();
+  // mockPostMyAddress();
+  const mockFn = mockPostMyAddress();
   const { container } = render(<RegisterAddress />);
-  // const submitValues = await fillValuesAndSubmit();
-  // expect(mockFn).toHaveBeenCalledWith(expect.objectContaining(submitValues));
+  const submitValues = await fillValuesAndSubmit();
+  expect(mockFn).toHaveBeenCalledWith(expect.objectContaining(submitValues));
   expect(container).toMatchSnapshot();
 });

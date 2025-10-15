@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen, fireEvent, logRoles } from "@testing-library/react";
 import {Form} from "./Form";
 import '@testing-library/jest-dom/extend-expect';
 
@@ -24,6 +24,12 @@ test("ボタンを押すと、イベントハンドラーが呼ばれる", () =>
   expect(mockFn).toHaveBeenCalled();
 })
 
+test("snapshot: アカウント名「taro」が表示される", () =>{
+  const {container} = render(<Form name="jiro" />);
+
+  console.log("👹👹👹👹",render(<Form name="taro" />));
+  expect(container).toMatchSnapshot();
+})
 
 
 // import { fireEvent, logRoles, render, screen } from "@testing-library/react";
@@ -56,6 +62,10 @@ test("ボタンを押すと、イベントハンドラーが呼ばれる", () =>
 //   expect(container).toMatchSnapshot();
 // });
 
+test("logRoles: レンダリング結果からロール・アクセシブルネームを確認", () => {
+  const {container} = render(<Form name="taro" />);
+  logRoles(container);
+})
 // test("logRoles: レンダリング結果からロール・アクセシブルネームを確認", () => {
 //   const { container } = render(<Form name="taro" />);
 //   logRoles(container);
